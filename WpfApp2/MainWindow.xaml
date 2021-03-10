@@ -55,9 +55,10 @@
             <TextBlock HorizontalAlignment="Left" Margin="10,301,0,0" TextWrapping="Wrap" Text="Монте-Карло --------------------------------" VerticalAlignment="Top" Foreground="#FF6E6E6E"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,323,0,0" TextWrapping="Wrap" Text="Число бросков: " VerticalAlignment="Top"/>
             <TextBox x:Name="input_montecarloAmt" HorizontalAlignment="Left" Height="22" Margin="104,322,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="136"/>
-            <Button Click="montecarlo_calculate_click" Content="Вычислить" HorizontalAlignment="Left" Margin="10,349,0,0" VerticalAlignment="Top" Width="229"/>
+            <Button Click="montecarlo_calculate_click" Content="Вычислить" HorizontalAlignment="Left" Margin="111,346,0,0" VerticalAlignment="Top" Width="129"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,369,0,0" TextWrapping="Wrap" Text="Результат: " VerticalAlignment="Top" Height="20" Foreground="#FF6E6E6E"/>
             <TextBlock x:Name="tb_montecarloResult" HorizontalAlignment="Left" Margin="73,369,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="166" Height="20"/>
+            <CheckBox x:Name="input_montecarloVisualise" Content="Визуализация" IsChecked="True" HorizontalAlignment="Left" Margin="10,349,0,0" VerticalAlignment="Top"/>
 
 
         </Grid>

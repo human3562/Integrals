@@ -47,12 +47,14 @@ namespace Integrals {
 
         private void simpson_calculate_click(object sender, RoutedEventArgs e) {
             if (!int.TryParse(input_simpsonDivisions.Text, out int n)) return;
+            if (n <= 0) return;
             tb_simpsonResult.Text = mvm.getIntegralOfActiveFunction(n).ToString();
         }
 
         private void montecarlo_calculate_click(object sender, RoutedEventArgs e) {
             if (!int.TryParse(input_montecarloAmt.Text, out int n)) return;
-            tb_montecarloResult.Text = mvm.getMonteCarloOfActiveFunction(n).ToString();
+            if (n <= 0) return;
+            tb_montecarloResult.Text = mvm.getMonteCarloOfActiveFunction(n, (bool)input_montecarloVisualise.IsChecked).ToString();
         }
     }
 }

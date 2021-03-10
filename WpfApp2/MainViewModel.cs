@@ -103,26 +103,26 @@ namespace Integrals {
             MyModel.InvalidatePlot(true);
         }
 
-        private void scatterPoints(int amt) {
-            ScatterSeries scatterAbove = new ScatterSeries { MarkerType = MarkerType.Plus, MarkerFill = OxyColors.Blue, MarkerStroke = OxyColors.Blue};
-            ScatterSeries scatterBelow = new ScatterSeries { MarkerType = MarkerType.Plus, MarkerFill = OxyColors.Red,  MarkerStroke = OxyColors.Red };
-            
-            Random r = new Random();
-            for (int i = 0; i < amt; i++) {
-                double x = activeFuncion.a + ((activeFuncion.b - activeFuncion.a)  * r.NextDouble());
-                double y = activeFuncion.getMinHeight() + ((activeFuncion.getMaxHeight() - activeFuncion.getMinHeight()) * r.NextDouble());
-                
-                if (activeFuncion.function(x) < y) {
-                    scatterAbove.Points.Add(new ScatterPoint(x, y, 1));
-                }
-                else {
-                    scatterBelow.Points.Add(new ScatterPoint(x, y, 1));
-                }
-            }
-            MyModel.Series.Add(scatterAbove);
-            MyModel.Series.Add(scatterBelow);
-            MyModel.InvalidatePlot(true);
-        }
+        //private void scatterPoints(int amt) {
+        //    ScatterSeries scatterAbove = new ScatterSeries { MarkerType = MarkerType.Plus, MarkerFill = OxyColors.Blue, MarkerStroke = OxyColors.Blue};
+        //    ScatterSeries scatterBelow = new ScatterSeries { MarkerType = MarkerType.Plus, MarkerFill = OxyColors.Red,  MarkerStroke = OxyColors.Red };
+        //    
+        //    Random r = new Random();
+        //    for (int i = 0; i < amt; i++) {
+        //        double x = activeFuncion.a + ((activeFuncion.b - activeFuncion.a)  * r.NextDouble());
+        //        double y = activeFuncion.getMinHeight() + ((activeFuncion.getMaxHeight() - activeFuncion.getMinHeight()) * r.NextDouble());
+        //        
+        //        if (activeFuncion.function(x) < y) {
+        //            scatterAbove.Points.Add(new ScatterPoint(x, y, 1));
+        //        }
+        //        else {
+        //            scatterBelow.Points.Add(new ScatterPoint(x, y, 1));
+        //        }
+        //    }
+        //    MyModel.Series.Add(scatterAbove);
+        //    MyModel.Series.Add(scatterBelow);
+        //    MyModel.InvalidatePlot(true);
+        //}
 
 
         private double v14(double x) {
@@ -137,7 +137,7 @@ namespace Integrals {
             return Math.Sin(2 * Math.Sin(2 * Math.Sin(2 * Math.Sin(x))));
         }
 
-        private double montecarlo(func f, int amt) {
+        private double montecarlo(func f, int amt, bool visualise) {
             ScatterSeries scatterAbove = new ScatterSeries { MarkerType = MarkerType.Plus, MarkerFill = OxyColors.Blue, MarkerStroke = OxyColors.Blue };
             ScatterSeries scatterBelow = new ScatterSeries { MarkerType = MarkerType.Plus, MarkerFill = OxyColors.Red, MarkerStroke = OxyColors.Red };
 
@@ -156,45 +156,47 @@ namespace Integrals {
 
                 if(f.function(x) > 0) {
                     if(y >= 0 && y <= f.function(x)) {
-                        scatterBelow.Points.Add(new ScatterPoint(x, y, 1));
+                        if (visualise) scatterBelow.Points.Add(new ScatterPoint(x, y, 1));
                         hitsUpper++;
                     }
                     else {
-                        scatterAbove.Points.Add(new ScatterPoint(x, y, 1));
+                        if (visualise) scatterAbove.Points.Add(new ScatterPoint(x, y, 1));
                     }
                 }else {
                     if(y <= 0 && y >= f.function(x)) {
-                        scatterBelow.Points.Add(new ScatterPoint(x, y, 1));
+                        if (visualise) scatterBelow.Points.Add(new ScatterPoint(x, y, 1));
                         hitsUnder++;
                     }
                     else {
-                        scatterAbove.Points.Add(new ScatterPoint(x, y, 1));
+                        if (visualise) scatterAbove.Points.Add(new ScatterPoint(x, y, 1));
                     }
                 }
             }
 
             double result = (w * (maxh - minh) * (hitsUpper-hitsUnder)) / amt;
 
-            MyModel.Series.Add(scatterAbove);
-            MyModel.Series.Add(scatterBelow);
-            MyModel.InvalidatePlot(true);
+            if (visualise) {
+                MyModel.Series.Add(scatterAbove);
+                MyModel.Series.Add(scatterBelow);
+                MyModel.InvalidatePlot(true);
+            }
 
             return result;
         }
 
-        public double getMonteCarloOfActiveFunction(int n) {
+        public double getMonteCarloOfActiveFunction(int n, bool visualise) {
             updateGraph();
-            return montecarlo(activeFuncion, n);
+            return montecarlo(activeFuncion, n, visualise);
         }
 
 
         private double simpsonsrule(func f, int n) {
             double h = (f.b - f.a) / n;
             double s = f.function(f.a) + f.function(f.b);
-            for(int i = 1; i < n-1; i += 2) {
+            for(int i = 1; i <= n-1; i += 2) {
                 s += 4 * f.function(f.a + i * h);
             }
-            for(int i = 2; i < n-2; i += 2) {
+            for(int i = 2; i <= n-2; i += 2) {
                 s += 2 * f.function(f.a + i * h);
             }
             return (h / 3) * s;
@@ -215,7 +217,7 @@ namespace Integrals {
                     updateGraph();
                     break;
                 case Key.D0:
-                    scatterPoints(1000);
+                    //scatterPoints(1000);
                     break;
             }
         }
