@@ -16,7 +16,7 @@ using OxyPlot;
 using OxyPlot.Wpf;
 using OxyPlot.Series;
 
-namespace WpfApp2 {
+namespace Integrals {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>

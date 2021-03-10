@@ -9,7 +9,7 @@ using OxyPlot;
 using OxyPlot.Series;
 using OxyPlot.Axes;
 
-namespace WpfApp2 {
+namespace Integrals {
     class MainViewModel {
         public PlotModel MyModel { get; private set; }
 
