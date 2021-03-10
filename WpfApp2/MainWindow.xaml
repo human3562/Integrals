@@ -1,0 +1,71 @@
+﻿<Window x:Class="WpfApp2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        mc:Ignorable="d"
+        Title="Вычисление интегралов" Height="450" Width="900" MinWidth="900" MinHeight="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="250px"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <oxy:PlotView Grid.Column="0" Model="{Binding MyModel}" KeyDown="Grid_KeyDown" RenderOptions.EdgeMode="Unspecified"/>
+
+        <Grid Grid.Column="1">
+
+            <TextBlock TextAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Активная функция: " VerticalAlignment="Top" Margin="10,13,0,0" Height="19" Width="105"/>
+            <ComboBox x:Name="cb_functions" SelectedIndex="2" HorizontalAlignment="Left" Margin="120,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cb_functions_selectionChanged">
+                <TextBlock Text="square Wave"/>
+                <TextBlock Text="sin"/>
+                <TextBlock Text="V14"/>
+            </ComboBox>
+            <Grid Margin="5,43,5,0" VerticalAlignment="Top" Height="33">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="input_a"  Text="0,32"   Grid.Column="0" Margin="5"/>
+                <TextBox x:Name="input_b"  Text="1,52"   Grid.Column="1" Margin="5"/>
+                <TextBox x:Name="input_dx" Text="0,0001" Grid.Column="2" Margin="5"/>
+            </Grid>
+            <TextBlock HorizontalAlignment="Left" Margin="10,32,0,0" TextWrapping="Wrap" Text="a:" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="90,32,0,0" TextWrapping="Wrap" Text="b:" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="170,32,0,0" TextWrapping="Wrap" Text="dx:" VerticalAlignment="Top"/>
+            <Button Content="Нарисовать график" HorizontalAlignment="Left" VerticalAlignment="Top" Width="230" Margin="10,91,0,0" Click="draw_graph_click"/>
+            <TextBlock x:Name="tb_graphingErrors" HorizontalAlignment="Left" Margin="10,70,0,0" TextWrapping="Wrap" Text="Error messages live here..." VerticalAlignment="Top" Width="230" Foreground="#FF969696"/>
+
+            <!--SIMPSON !-->
+            <TextBlock HorizontalAlignment="Left" Margin="10,116,0,0" TextWrapping="Wrap" Text="Метод Симпсона----------------------------" VerticalAlignment="Top" Foreground="#FF6E6E6E"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,137,0,0" TextWrapping="Wrap" Text="Кол-во разбиений: " VerticalAlignment="Top"/>
+            <TextBox x:Name="input_simpsonDivisions" HorizontalAlignment="Left" Height="22" Margin="122,136,0,0" TextWrapping="Wrap" Text="18" VerticalAlignment="Top" Width="117"/>
+            <Button Click="simpson_calculate_click" Content="Вычислить" HorizontalAlignment="Left" Margin="11,163,0,0" VerticalAlignment="Top" Width="229"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,183,0,0" TextWrapping="Wrap" Text="Результат: " VerticalAlignment="Top" Height="20" Foreground="#FF6E6E6E"/>
+            <TextBlock x:Name="tb_simpsonResult" HorizontalAlignment="Left" Margin="73,183,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="166" Height="20"/>
+
+            <!--MONTECARLO !-->
+            <TextBlock HorizontalAlignment="Left" Margin="10,301,0,0" TextWrapping="Wrap" Text="Монте-Карло --------------------------------" VerticalAlignment="Top" Foreground="#FF6E6E6E"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,323,0,0" TextWrapping="Wrap" Text="Число бросков: " VerticalAlignment="Top"/>
+            <TextBox x:Name="input_montecarloAmt" HorizontalAlignment="Left" Height="22" Margin="104,322,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="136"/>
+            <Button Click="montecarlo_calculate_click" Content="Вычислить" HorizontalAlignment="Left" Margin="10,349,0,0" VerticalAlignment="Top" Width="229"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,369,0,0" TextWrapping="Wrap" Text="Результат: " VerticalAlignment="Top" Height="20" Foreground="#FF6E6E6E"/>
+            <TextBlock x:Name="tb_montecarloResult" HorizontalAlignment="Left" Margin="73,369,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="166" Height="20"/>
+
+
+        </Grid>
+
+
+
+        <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="ЛКМ - показать координаты; ПКМ - перемещать график; Колесико мышки - приближение; Ctrl+ПКМ - прямоугольное приближение; A - сброс изменений." VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="20" Width="882" Foreground="#FF787878"/>
+    </Grid>
+
+
+</Window>
