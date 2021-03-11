@@ -14,9 +14,9 @@ namespace Integrals {
         public PlotModel MyModel { get; private set; }
 
         readonly func sinFunc;
-        readonly func cosFunc;
         readonly func squareWaveFunc;
         readonly func v14func;
+        readonly func peakfunc;
 
         private func activeFuncion;
 
@@ -48,9 +48,9 @@ namespace Integrals {
 
         public MainViewModel() {
             MyModel = new PlotModel { Title = ""  };
-            cosFunc = new func(cos, 0, 10, 0.01);
             sinFunc = new func(Math.Sin, 0, Math.PI, 0.01);
             squareWaveFunc = new func(squareWave, 0, 20, 0.001);
+            peakfunc = new func(peak, -1, 1, 0.01);
             v14func = new func(v14, 0.32, 1.52, 0.0001);
 
             activeFuncion = v14func;
@@ -137,6 +137,10 @@ namespace Integrals {
             return Math.Sin(2 * Math.Sin(2 * Math.Sin(2 * Math.Sin(x))));
         }
 
+        private double peak(double x) {
+            return 1 / (Math.Abs(x) + 0.01);
+        }
+
         private double montecarlo(func f, int amt, bool visualise) {
             ScatterSeries scatterAbove = new ScatterSeries { MarkerType = MarkerType.Plus, MarkerFill = OxyColors.Blue, MarkerStroke = OxyColors.Blue };
             ScatterSeries scatterBelow = new ScatterSeries { MarkerType = MarkerType.Plus, MarkerFill = OxyColors.Red, MarkerStroke = OxyColors.Red };
@@ -191,6 +195,7 @@ namespace Integrals {
 
 
         private double simpsonsrule(func f, int n) {
+            n = (int)(n / 2) * 2;
             double h = (f.b - f.a) / n;
             double s = f.function(f.a) + f.function(f.b);
             for(int i = 1; i <= n-1; i += 2) {
@@ -202,8 +207,28 @@ namespace Integrals {
             return (h / 3) * s;
         }
 
-        public double getIntegralOfActiveFunction(int n) {
+        public double getSimpson(int n) {
             return simpsonsrule(activeFuncion, n);
+        }
+
+        public double getSimpson(int n, double precision, out int nUsed, out double err) {
+            double sOld = simpsonsrule(activeFuncion, 2);
+            double sNew = simpsonsrule(activeFuncion, 4);
+            int currentN = 4;
+            
+            err = precision*2;
+            double t = 0;
+
+            while (err > precision) {
+                if (currentN*2 > n) break;
+                currentN *= 2;
+                sNew = simpsonsrule(activeFuncion, currentN);
+                t = (sNew - sOld) / 15;
+                err = Math.Abs(t);
+                sOld = sNew + t;
+            }
+            nUsed = currentN;
+            return sNew + t;
         }
 
         public void keyDown(Key key) {
@@ -234,6 +259,9 @@ namespace Integrals {
                     break;
                 case 2:
                     activeFuncion = v14func;
+                    break;
+                case 3:
+                    activeFuncion = peakfunc;
                     break;
             }
         }

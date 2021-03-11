@@ -47,8 +47,11 @@ namespace Integrals {
 
         private void simpson_calculate_click(object sender, RoutedEventArgs e) {
             if (!int.TryParse(input_simpsonDivisions.Text, out int n)) return;
+            if (!double.TryParse(input_simpsonsPrecision.Text, out double precision)) return;
             if (n <= 0) return;
-            tb_simpsonResult.Text = mvm.getIntegralOfActiveFunction(n).ToString();
+            tb_simpsonResult.Text = mvm.getSimpson(n, precision, out int nUsed, out double err).ToString();
+            tb_simpsonPrecision.Text = nUsed.ToString();
+            tb_simpsonError.Text = err.ToString();
         }
 
         private void montecarlo_calculate_click(object sender, RoutedEventArgs e) {

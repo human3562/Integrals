@@ -26,6 +26,7 @@
                 <TextBlock Text="square Wave"/>
                 <TextBlock Text="sin"/>
                 <TextBlock Text="V14"/>
+                <TextBlock Text="1/(|x|+0.01)"/>
             </ComboBox>
             <Grid Margin="5,43,5,0" VerticalAlignment="Top" Height="33">
                 <Grid.ColumnDefinitions>
@@ -44,22 +45,32 @@
             <TextBlock x:Name="tb_graphingErrors" HorizontalAlignment="Left" Margin="10,70,0,0" TextWrapping="Wrap" Text="Error messages live here..." VerticalAlignment="Top" Width="230" Foreground="#FF969696"/>
 
             <!--SIMPSON !-->
-            <TextBlock HorizontalAlignment="Left" Margin="10,116,0,0" TextWrapping="Wrap" Text="Метод Симпсона----------------------------" VerticalAlignment="Top" Foreground="#FF6E6E6E"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,137,0,0" TextWrapping="Wrap" Text="Кол-во разбиений: " VerticalAlignment="Top"/>
-            <TextBox x:Name="input_simpsonDivisions" HorizontalAlignment="Left" Height="22" Margin="122,136,0,0" TextWrapping="Wrap" Text="18" VerticalAlignment="Top" Width="117"/>
-            <Button Click="simpson_calculate_click" Content="Вычислить" HorizontalAlignment="Left" Margin="11,163,0,0" VerticalAlignment="Top" Width="229"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,183,0,0" TextWrapping="Wrap" Text="Результат: " VerticalAlignment="Top" Height="20" Foreground="#FF6E6E6E"/>
-            <TextBlock x:Name="tb_simpsonResult" HorizontalAlignment="Left" Margin="73,183,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="166" Height="20"/>
+            <Grid Height="147" VerticalAlignment="Top" Margin="0,116,0,0" Background="AliceBlue">
+                <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="Метод Симпсона----------------------------" VerticalAlignment="Top" Foreground="#FF6E6E6E"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,21,0,0" TextWrapping="Wrap" Text="Кол-во разбиений (макс): " VerticalAlignment="Top"/>
+                <TextBox x:Name="input_simpsonDivisions" HorizontalAlignment="Left" Height="19" Margin="159,20,0,0" TextWrapping="Wrap" Text="2048" VerticalAlignment="Top" Width="80"/>
+                <TextBlock HorizontalAlignment="Left" Margin="11,42,0,0" TextWrapping="Wrap" Text="Требуемая точность: " VerticalAlignment="Top"/>
+                <TextBox x:Name="input_simpsonsPrecision" HorizontalAlignment="Left" Height="18" Margin="134,41,0,0" TextWrapping="Wrap" Text="1e-7" VerticalAlignment="Top" Width="105" RenderTransformOrigin="0.506,0.361"/>
+                <Button Click="simpson_calculate_click" Content="Вычислить" HorizontalAlignment="Left" Margin="11,63,0,0" VerticalAlignment="Top" Width="229"/>
+
+                <TextBlock HorizontalAlignment="Left" Margin="10,83,0,0" TextWrapping="Wrap" Text="Результат: " VerticalAlignment="Top" Height="20" Foreground="#FF6E6E6E"/>
+                <TextBlock x:Name="tb_simpsonResult" HorizontalAlignment="Left" Margin="73,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="166" Height="20"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,103,0,0" TextWrapping="Wrap" Text="n-реальное: " VerticalAlignment="Top" Height="20" Foreground="#FF6E6E6E"/>
+                <TextBlock x:Name="tb_simpsonPrecision" HorizontalAlignment="Left" Margin="85,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" Height="20"/>
+                <TextBlock HorizontalAlignment="Left" Margin="11,123,0,0" TextWrapping="Wrap" Text="Погрешность: " VerticalAlignment="Top" Height="20" Foreground="#FF6E6E6E"/>
+                <TextBlock x:Name="tb_simpsonError" HorizontalAlignment="Left" Margin="95,123,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="145" Height="20"/>
+            </Grid>
 
             <!--MONTECARLO !-->
-            <TextBlock HorizontalAlignment="Left" Margin="10,301,0,0" TextWrapping="Wrap" Text="Монте-Карло --------------------------------" VerticalAlignment="Top" Foreground="#FF6E6E6E"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,323,0,0" TextWrapping="Wrap" Text="Число бросков: " VerticalAlignment="Top"/>
-            <TextBox x:Name="input_montecarloAmt" HorizontalAlignment="Left" Height="22" Margin="104,322,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="136"/>
-            <Button Click="montecarlo_calculate_click" Content="Вычислить" HorizontalAlignment="Left" Margin="111,346,0,0" VerticalAlignment="Top" Width="129"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,369,0,0" TextWrapping="Wrap" Text="Результат: " VerticalAlignment="Top" Height="20" Foreground="#FF6E6E6E"/>
-            <TextBlock x:Name="tb_montecarloResult" HorizontalAlignment="Left" Margin="73,369,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="166" Height="20"/>
-            <CheckBox x:Name="input_montecarloVisualise" Content="Визуализация" IsChecked="True" HorizontalAlignment="Left" Margin="10,349,0,0" VerticalAlignment="Top"/>
-
+            <Grid Margin="0,268,0,0" Background="AliceBlue" Height="90" VerticalAlignment="Top">
+                <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="Монте-Карло ----------------------------" VerticalAlignment="Top" Foreground="#FF6E6E6E" Width="220"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,20,0,0" TextWrapping="Wrap" Text="Число бросков: " VerticalAlignment="Top"/>
+                <TextBox x:Name="input_montecarloAmt" HorizontalAlignment="Left" Height="22" Margin="106,19,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="134"/>
+                <Button Click="montecarlo_calculate_click" Content="Вычислить" HorizontalAlignment="Left" Margin="111,44,0,0" VerticalAlignment="Top" Width="129"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,67,0,0" TextWrapping="Wrap" Text="Результат: " VerticalAlignment="Top" Height="20" Foreground="#FF6E6E6E"/>
+                <TextBlock x:Name="tb_montecarloResult" HorizontalAlignment="Left" Margin="73,67,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="167" Height="20"/>
+                <CheckBox x:Name="input_montecarloVisualise" Content="Визуализация" IsChecked="True" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top"/>
+            </Grid>
 
         </Grid>
 
