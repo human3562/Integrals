@@ -57,13 +57,14 @@
                 <TextBlock x:Name="tb_simpsonResult" HorizontalAlignment="Left" Margin="73,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="166" Height="20"/>
                 <TextBlock HorizontalAlignment="Left" Margin="10,103,0,0" TextWrapping="Wrap" Text="n-реальное: " VerticalAlignment="Top" Height="20" Foreground="#FF6E6E6E"/>
                 <TextBlock x:Name="tb_simpsonPrecision" HorizontalAlignment="Left" Margin="85,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" Height="20"/>
-                <TextBlock HorizontalAlignment="Left" Margin="11,123,0,0" TextWrapping="Wrap" Text="Погрешность: " VerticalAlignment="Top" Height="20" Foreground="#FF6E6E6E"/>
-                <TextBlock x:Name="tb_simpsonError" HorizontalAlignment="Left" Margin="95,123,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="145" Height="20"/>
+                <TextBlock HorizontalAlignment="Left" Margin="11,123,0,0" TextWrapping="Wrap" Text="Ошибка: " VerticalAlignment="Top" Height="20" Foreground="#FF6E6E6E"/>
+                <TextBlock x:Name="tb_simpsonError" HorizontalAlignment="Left" Margin="67,123,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="173" Height="20"/>
+                <TextBlock Text="(по Рунге)" HorizontalAlignment="Left" Margin="11,136,0,0" Height="11" VerticalAlignment="Top" FontSize="8" Foreground="#FF6E6E6E" Width="51"/>
             </Grid>
 
             <!--MONTECARLO !-->
             <Grid Margin="0,268,0,0" Background="AliceBlue" Height="90" VerticalAlignment="Top">
-                <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="Монте-Карло ----------------------------" VerticalAlignment="Top" Foreground="#FF6E6E6E" Width="220"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="Монте-Карло -------------------------------" VerticalAlignment="Top" Foreground="#FF6E6E6E" Width="230"/>
                 <TextBlock HorizontalAlignment="Left" Margin="10,20,0,0" TextWrapping="Wrap" Text="Число бросков: " VerticalAlignment="Top"/>
                 <TextBox x:Name="input_montecarloAmt" HorizontalAlignment="Left" Height="22" Margin="106,19,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="134"/>
                 <Button Click="montecarlo_calculate_click" Content="Вычислить" HorizontalAlignment="Left" Margin="111,44,0,0" VerticalAlignment="Top" Width="129"/>

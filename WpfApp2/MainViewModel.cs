@@ -18,9 +18,9 @@ namespace Integrals {
         readonly func v14func;
         readonly func peakfunc;
 
-        private func activeFuncion;
+        public func activeFuncion;
 
-        struct func{
+        public struct func{
             public func(Func<double, double> f, double a, double b, double dx) {
                 this.a = a; this.b = b; this.dx = dx; this.function = f;
                 series = new FunctionSeries(f, a, b, dx);
@@ -251,11 +251,9 @@ namespace Integrals {
             switch (id) {
                 case 0:
                     activeFuncion = squareWaveFunc;
-                    //updateGraph();
                     break;
                 case 1:
                     activeFuncion = sinFunc;
-                    //updateGraph();
                     break;
                 case 2:
                     activeFuncion = v14func;
@@ -264,6 +262,26 @@ namespace Integrals {
                     activeFuncion = peakfunc;
                     break;
             }
+        }
+
+        public void changeFunction(int id, out double a, out double b, out double dx) {
+            switch (id) {
+                case 0:
+                    activeFuncion = squareWaveFunc;
+                    break;
+                case 1:
+                    activeFuncion = sinFunc;
+                    break;
+                case 2:
+                    activeFuncion = v14func;
+                    break;
+                case 3:
+                    activeFuncion = peakfunc;
+                    break;
+            }
+            a = activeFuncion.a;
+            b = activeFuncion.b;
+            dx = activeFuncion.dx;
         }
 
         public void drawGraph(double a, double b, double dx) {

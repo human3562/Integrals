@@ -33,7 +33,10 @@ namespace Integrals {
         }
 
         private void cb_functions_selectionChanged(object sender, SelectionChangedEventArgs e) {
-            mvm.changeFunction(cb_functions.SelectedIndex);
+            if (!this.IsLoaded) return;
+            mvm.changeFunction(cb_functions.SelectedIndex, out double a, out double b, out double dx);
+            input_a.Text = a.ToString(); input_b.Text = b.ToString(); input_dx.Text = dx.ToString();
+            mvm.drawGraph(a, b, dx);
         }
 
         private void draw_graph_click(object sender, RoutedEventArgs e) {
