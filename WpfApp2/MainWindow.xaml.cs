@@ -60,7 +60,11 @@ namespace Integrals {
         private void montecarlo_calculate_click(object sender, RoutedEventArgs e) {
             if (!int.TryParse(input_montecarloAmt.Text, out int n)) return;
             if (n <= 0) return;
-            tb_montecarloResult.Text = mvm.getMonteCarloOfActiveFunction(n, (bool)input_montecarloVisualise.IsChecked).ToString();
+            if (!int.TryParse(input_montecarloThrowAmt.Text, out int throwAmt)) return;
+            if (throwAmt <= 0) return;
+
+            tb_montecarloResult.Text = mvm.getMonteCarloOfActiveFunction(n, (bool)input_montecarloVisualise.IsChecked, throwAmt, out double err).ToString();
+            tb_montecarloErr.Text = err.ToString();
         }
     }
 }

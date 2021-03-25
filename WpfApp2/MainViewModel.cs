@@ -189,8 +189,26 @@ namespace Integrals {
         }
 
         public double getMonteCarloOfActiveFunction(int n, bool visualise) {
-            updateGraph();
+            if(visualise) updateGraph();
             return montecarlo(activeFuncion, n, visualise);
+        }
+
+        public double getMonteCarloOfActiveFunction(int n, bool visualise, int throwAmt, out double err) {
+            updateGraph();
+            double[] results = new double[throwAmt];
+            double[] resultsSquared = new double[throwAmt];
+            for(int i = 0; i < throwAmt; i++) {
+                if (visualise) {
+                    updateGraph();
+                    results[i] = montecarlo(activeFuncion, n, true);
+                    resultsSquared[i] = results[i] * results[i];
+                    visualise = false;
+                }
+                results[i] = montecarlo(activeFuncion, n, false);
+                resultsSquared[i] = results[i] * results[i];
+            }
+            err = Math.Sqrt(Math.Abs(resultsSquared.Average() - (results.Average() * results.Average())));
+            return results.Average();
         }
 
 
